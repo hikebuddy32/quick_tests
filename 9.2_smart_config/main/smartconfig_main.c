@@ -62,7 +62,7 @@ static void initialise_wifi(void)
 
     ESP_ERROR_CHECK( esp_wifi_init(&cfg) );
     ESP_ERROR_CHECK( esp_wifi_set_mode(WIFI_MODE_STA) );
-    ESP_ERROR_CHECK( esp_wifi_start() );
+    // ESP_ERROR_CHECK( esp_wifi_start() );
 }
 
 static void sc_callback(smartconfig_status_t status, void *pdata)
@@ -106,7 +106,7 @@ void smartconfig_example_task(void * parm)
     ESP_ERROR_CHECK( esp_smartconfig_set_type(SC_TYPE_ESPTOUCH) );
     ESP_ERROR_CHECK( esp_smartconfig_start(sc_callback) );
     while (1) {
-        uxBits = xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT | ESPTOUCH_DONE_BIT, true, false, portMAX_DELAY); 
+        uxBits = xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT | ESPTOUCH_DONE_BIT, true, false, portMAX_DELAY);
         if(uxBits & CONNECTED_BIT) {
             ESP_LOGI(TAG, "WiFi Connected to ap");
         }
@@ -123,4 +123,3 @@ void app_main()
     ESP_ERROR_CHECK( nvs_flash_init() );
     initialise_wifi();
 }
-

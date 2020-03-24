@@ -70,9 +70,9 @@ void wifi_init_softap()
             .authmode = WIFI_AUTH_WPA_WPA2_PSK
         },
     };
-    // if (strlen(EXAMPLE_ESP_WIFI_PASS) == 0) {
-    //     wifi_config.ap.authmode = WIFI_AUTH_OPEN;
-    // }
+    if (strlen(EXAMPLE_ESP_WIFI_PASS) == 0) {
+        wifi_config.ap.authmode = WIFI_AUTH_OPEN;
+    }
 
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
     ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_AP, &wifi_config));
@@ -86,15 +86,12 @@ void app_main()
 {
     //Initialize NVS
     esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES) {
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
       ESP_ERROR_CHECK(nvs_flash_erase());
       ret = nvs_flash_init();
     }
     ESP_ERROR_CHECK(ret);
-
+    
     ESP_LOGI(TAG, "ESP_WIFI_MODE_AP");
     wifi_init_softap();
-    while(1){
-
-    }
 }

@@ -1,0 +1,6 @@
+[submodule "4_bmx160/components/bmi160"]
+	path = 4_bmx160/components/bmi160
+	url = https://github.com/BoschSensortec/BMI160_driver.git
+[submodule "4_bmx160/components/bmm150"]
+	path = 4_bmx160/components/bmm150
+	url = https://github.com/BoschSensortec/BMM150-Sensor-API.git
